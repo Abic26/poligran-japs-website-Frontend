@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-japs-navy: #123f5d;
+  --color-japs-blue: #17a9dc;
+  --color-japs-light-blue: #a7def3;
+  --color-japs-yellow: #fff35b;
+  --color-japs-text: #526b79;
+  --color-japs-line: #e5edf0;
+  --color-japs-soft: #f6f8f8;
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 min-w-80 bg-white font-sans text-japs-navy;
+  }
+
+  #app {
+    @apply flex min-h-screen flex-col;
+  }
+
+  main {
+    @apply flex-1 overflow-hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-bold text-japs-navy;
+  }
+
+  p {
+    @apply leading-relaxed text-japs-text;
+  }
+}
