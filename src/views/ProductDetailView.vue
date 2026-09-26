@@ -34,6 +34,9 @@ const relacionados = [
       "https://ik.imagekit.io/ftuu3w4hn/conector-media-tension/conector-media-tension-miniatura.webp?updatedAt=1772038099338",
   },
 ];
+relacionados.forEach(
+  (producto, index) => (producto.precio = 90000 + index * 25000),
+);
 </script>
 <template>
   <main

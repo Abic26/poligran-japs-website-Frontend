@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "titulo": "Asesoría técnica",
+    "descripcion": "Orientación para seleccionar equipos seguros y adecuados para cada red eléctrica.",
+    "icono": "⚡"
+  },
+  {
+    "id": 2,
+    "titulo": "Suministro de equipos",
+    "descripcion": "Soluciones de alta, media y baja tensión para proyectos de diferentes escalas.",
+    "icono": "▣"
+  },
+  {
+    "id": 3,
+    "titulo": "Acompañamiento",
+    "descripcion": "Soporte cercano desde la cotización hasta la entrega de los productos.",
+    "icono": "✓"
+  }
+]

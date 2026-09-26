@@ -1,6 +1,8 @@
 <script setup>
 import ProductCard from "../components/ProductCard.vue";
+import ContactForm from "../components/ContactForm.vue";
 import logoJaps from "../assets/logo-japs.png";
+import servicios from "../data/servicios.json";
 
 const noticias = [
   {
@@ -32,6 +34,7 @@ const productos = [
     referencia: "REF-001",
     estado: "Disponible",
     estadoClase: "",
+    precio: 185000,
     imagen:
       "https://ik.imagekit.io/ftuu3w4hn/cortacirtuitos-de-15-kv/thumbnail/cortacirtuitos-de-15-kv.webp?updatedAt=1746641165006",
   },
@@ -40,6 +43,7 @@ const productos = [
     referencia: "REF-014",
     estado: "Disponible",
     estadoClase: "",
+    precio: 142000,
     imagen:
       "https://ik.imagekit.io/ftuu3w4hn/Aislador-Suspension-Polimerico-115-kv-120-kn/thumbnail/Aislador-Suspension-Polimerico-115-kv-120-kn.webp?updatedAt=1746639891995",
   },
@@ -48,6 +52,7 @@ const productos = [
     referencia: "REF-021",
     estado: "Consultar",
     estadoClase: "orange",
+    precio: 68000,
     imagen:
       "https://ik.imagekit.io/ftuu3w4hn/aislador-loza-carrete-53-3/thumbnail/aislador-loza-carrete-53-3.webp?updatedAt=1746640240391",
   },
@@ -56,6 +61,7 @@ const productos = [
     referencia: "REF-040",
     estado: "Disponible",
     estadoClase: "",
+    precio: 96000,
     imagen:
       "https://ik.imagekit.io/ftuu3w4hn/conector-media-tension/conector-media-tension-miniatura.webp?updatedAt=1772038099338",
   },
@@ -128,6 +134,36 @@ const clientes = [
             <span class="size-[7px] rounded-full bg-japs-yellow"></span>
             Potencia · seguridad · respaldo
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-japs-soft py-20">
+      <div
+        class="mx-auto w-[calc(100%-3rem)] max-w-[1100px] max-[750px]:w-[calc(100%-2rem)]"
+      >
+        <div class="mb-9 text-center">
+          <span
+            class="text-[11px] font-extrabold uppercase tracking-[1.2px] text-japs-blue"
+            >Lo que hacemos</span
+          >
+          <h2 class="mt-2 text-[clamp(30px,4vw,48px)]">
+            Servicios para tu proyecto
+          </h2>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+          <article
+            v-for="servicio in servicios"
+            :key="servicio.id"
+            class="border-t-4 border-japs-yellow bg-white p-7 shadow-sm"
+          >
+            <span
+              class="grid size-11 place-items-center rounded-full bg-japs-navy text-xl text-japs-yellow"
+              >{{ servicio.icono }}</span
+            >
+            <h3 class="mt-5">{{ servicio.titulo }}</h3>
+            <p class="text-sm">{{ servicio.descripcion }}</p>
+          </article>
         </div>
       </div>
     </section>
@@ -341,43 +377,7 @@ const clientes = [
               >
             </div>
           </div>
-          <form id="contacto" class="p-8" @submit.prevent>
-            <h3>Envíanos un mensaje</h3>
-            <div class="grid grid-cols-2 gap-3 max-[430px]:grid-cols-1">
-              <label class="grid gap-1 text-[11px] font-bold"
-                >Nombre<input
-                  class="w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                  required
-                  placeholder="Tu nombre" /></label
-              ><label class="grid gap-1 text-[11px] font-bold"
-                >Correo<input
-                  class="w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                  required
-                  type="email"
-                  placeholder="correo@ejemplo.com" /></label
-              ><label class="grid gap-1 text-[11px] font-bold"
-                >Teléfono<input
-                  class="w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                  placeholder="Tu teléfono" /></label
-              ><label class="grid gap-1 text-[11px] font-bold"
-                >Asunto<input
-                  class="w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                  placeholder="Motivo del mensaje" /></label
-              ><label
-                class="col-span-full grid gap-1 text-[11px] font-bold max-[430px]:col-span-1"
-                >Mensaje<textarea
-                  class="min-h-[76px] w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                  required
-                  placeholder="Cuéntanos sobre tu proyecto"
-                ></textarea>
-              </label>
-            </div>
-            <button
-              class="mt-3.5 inline-flex min-h-10 w-full items-center justify-center bg-japs-yellow px-[22px] text-xs font-extrabold text-japs-navy"
-            >
-              Enviar mensaje
-            </button>
-          </form>
+          <ContactForm id="contacto" />
         </div>
       </div>
     </section>

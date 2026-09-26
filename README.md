@@ -10,11 +10,47 @@ Sitio web corporativo de **JAPS**, una empresa dedicada a la distribución de eq
 - Sección de noticias y vista de detalle para artículos.
 - Página corporativa sobre JAPS.
 - Formulario de contacto y acceso directo a WhatsApp.
+- Servicios renderizados dinámicamente desde un archivo JSON.
+- Noticias favoritas y carrito de compras con persistencia local.
+- Formulario de contacto con validaciones y confirmación de envío simulada.
 - Navegación entre páginas con Vue Router.
 - Diseño adaptable a computadores, tabletas y dispositivos móviles.
 
 > [!NOTE]
-> Este proyecto es actualmente un prototipo de frontend. Los buscadores, filtros, paginación y formularios son elementos visuales y todavía no están conectados a un backend.
+> Este proyecto es un prototipo de frontend. El carrito, los favoritos y el formulario funcionan localmente, pero no están conectados a un backend ni a una pasarela de pagos.
+
+## Funcionalidades implementadas
+
+### Servicios dinámicos
+
+Los servicios de JAPS se almacenan en `src/data/servicios.json` y se muestran dinámicamente en la página de inicio mediante `v-for`. Para agregar otro servicio solo es necesario incluir un nuevo objeto con `id`, `titulo`, `descripcion` e `icono` dentro del archivo JSON.
+
+### Noticias favoritas
+
+- Cada noticia tiene un botón con forma de corazón para agregarla o quitarla de favoritos.
+- La página de noticias permite filtrar y mostrar solamente las noticias favoritas.
+- La selección se conserva en el navegador mediante `localStorage`.
+
+### Carrito de compras
+
+- Los productos pueden agregarse al carrito desde sus tarjetas.
+- El encabezado muestra la cantidad total de productos agregados.
+- El carrito permite aumentar o disminuir cantidades y eliminar productos.
+- Se calcula automáticamente el valor total de la compra.
+- El contenido se conserva en `localStorage`, incluso después de recargar la página.
+- El botón **Solicitar cotización** dirige al formulario de contacto. No se realizan pagos reales.
+
+### Formulario de contacto
+
+El formulario está disponible en la página de inicio y en la sección de contacto. Incluye validaciones para:
+
+- Nombre de mínimo 3 caracteres.
+- Correo electrónico con formato válido.
+- Teléfono opcional con formato válido.
+- Asunto de mínimo 3 caracteres.
+- Mensaje de mínimo 10 caracteres.
+
+Cuando todos los campos son válidos, se limpian los datos y se presenta una confirmación que simula el envío. La información no se envía a ningún servidor.
 
 ## Tecnologías
 
@@ -56,24 +92,24 @@ Para ejecutar el proyecto necesitas tener instalados:
 
 ## Comandos disponibles
 
-| Comando | Descripción |
-| --- | --- |
-| `npm run dev` | Inicia el servidor local con recarga automática. |
-| `npm run build` | Genera la versión de producción en la carpeta `dist/`. |
-| `npm run preview` | Sirve localmente la versión compilada. |
-| `npm run format` | Formatea el código fuente y los archivos de configuración con Prettier. |
+| Comando           | Descripción                                                             |
+| ----------------- | ----------------------------------------------------------------------- |
+| `npm run dev`     | Inicia el servidor local con recarga automática.                        |
+| `npm run build`   | Genera la versión de producción en la carpeta `dist/`.                  |
+| `npm run preview` | Sirve localmente la versión compilada.                                  |
+| `npm run format`  | Formatea el código fuente y los archivos de configuración con Prettier. |
 
 ## Rutas
 
-| Ruta | Contenido |
-| --- | --- |
-| `/` | Página de inicio. |
-| `/productos` | Catálogo de productos. |
-| `/productos/cortacircuito` | Detalle de un producto. |
-| `/noticias` | Listado de noticias. |
-| `/noticias/energia-solar` | Detalle de una noticia. |
-| `/nosotros` | Información sobre la empresa. |
-| `/contacto` | Datos y formulario de contacto. |
+| Ruta                       | Contenido                       |
+| -------------------------- | ------------------------------- |
+| `/`                        | Página de inicio.               |
+| `/productos`               | Catálogo de productos.          |
+| `/productos/cortacircuito` | Detalle de un producto.         |
+| `/noticias`                | Listado de noticias.            |
+| `/noticias/energia-solar`  | Detalle de una noticia.         |
+| `/nosotros`                | Información sobre la empresa.   |
+| `/contacto`                | Datos y formulario de contacto. |
 
 ## Estructura del proyecto
 
@@ -83,6 +119,8 @@ japs-website/
 ├── src/
 │   ├── assets/             # Imágenes y recursos locales
 │   ├── components/         # Componentes reutilizables
+│   ├── composables/         # Estado compartido del carrito y favoritos
+│   ├── data/                # Información cargada desde archivos JSON
 │   ├── router/             # Configuración de rutas
 │   ├── views/              # Vistas principales del sitio
 │   ├── App.vue             # Estructura global de la aplicación

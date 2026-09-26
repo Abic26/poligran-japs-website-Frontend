@@ -1,3 +1,6 @@
+<script setup>
+import ContactForm from "../components/ContactForm.vue";
+</script>
 <template>
   <main>
     <section
@@ -65,47 +68,7 @@
             >
           </div>
         </div>
-        <form id="formulario" class="p-8" @submit.prevent>
-          <span
-            class="text-[11px] font-extrabold uppercase tracking-[1.2px] text-japs-blue"
-            >Escríbenos</span
-          >
-          <h3>Envíanos un mensaje</h3>
-          <div class="grid grid-cols-2 gap-3 max-[430px]:grid-cols-1">
-            <label class="grid gap-1 text-[11px] font-bold"
-              >Nombre<input
-                class="w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                required
-                placeholder="Tu nombre" /></label
-            ><label class="grid gap-1 text-[11px] font-bold"
-              >Correo<input
-                class="w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                required
-                type="email"
-                placeholder="correo@ejemplo.com" /></label
-            ><label class="grid gap-1 text-[11px] font-bold"
-              >Teléfono<input
-                class="w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                placeholder="Tu teléfono" /></label
-            ><label class="grid gap-1 text-[11px] font-bold"
-              >Asunto<input
-                class="w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                placeholder="Motivo del mensaje" /></label
-            ><label
-              class="col-span-full grid gap-1 text-[11px] font-bold max-[430px]:col-span-1"
-              >Mensaje<textarea
-                class="min-h-[76px] w-full border border-[#d6e8ef] bg-[#f1f9fc] p-2.5 text-xs"
-                required
-                placeholder="Cuéntanos sobre tu proyecto"
-              ></textarea>
-            </label>
-          </div>
-          <button
-            class="mt-3.5 inline-flex min-h-10 w-full items-center justify-center bg-japs-yellow px-[22px] text-xs font-extrabold text-japs-navy transition hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Enviar mensaje
-          </button>
-        </form>
+        <ContactForm id="formulario" />
       </div>
     </section>
   </main>

@@ -1,5 +1,11 @@
 <script setup>
+import { computed, ref } from "vue";
 import NewsCard from "../components/NewsCard.vue";
+import { useShop } from "../composables/useShop";
+const search = ref("");
+const category = ref("Todas");
+const onlyFavorites = ref(false);
+const { favorites } = useShop();
 const fotos = [
   "https://www.valoraanalitik.com/wp-content/uploads/2026/09/Martha-Villarreal-presidenta-de-la-Junta-Directiva-de-Acipet-1024x597.webp",
   "https://www.minenergia.gov.co/media/images/Colombia_cierra_su_presidencia_pro_tempore_del_.original.jpg",
@@ -49,6 +55,20 @@ const noticias = [
     imagen: fotos[2],
   },
 ];
+const categorias = computed(() => [
+  "Todas",
+  ...new Set(noticias.map((item) => item.categoria)),
+]);
+const filteredNews = computed(() => {
+  const query = search.value.trim().toLowerCase();
+  return noticias.filter(
+    (item) =>
+      (category.value === "Todas" || item.categoria === category.value) &&
+      (!query ||
+        `${item.titulo} ${item.descripcion}`.toLowerCase().includes(query)) &&
+      (!onlyFavorites.value || favorites.value.includes(item.titulo)),
+  );
+});
 </script>
 <template>
   <main>
@@ -64,26 +84,43 @@ const noticias = [
         class="mx-auto w-[calc(100%-3rem)] max-w-[1100px] max-[750px]:w-[calc(100%-2rem)]"
       >
         <div
-          class="mb-5 flex justify-end gap-2.5 border-b border-[#dce5e8] pb-[18px]"
+          class="mb-5 flex flex-wrap justify-end gap-2.5 border-b border-[#dce5e8] pb-[18px]"
         >
           <select
+            v-model="category"
             class="min-h-9 border-0 border-b bg-transparent px-3"
             aria-label="Categoría"
           >
-            <option>Actualidad</option>
-            <option>Proyectos</option></select
+            <option v-for="item in categorias" :key="item">
+              {{ item }}
+            </option></select
           ><input
+            v-model="search"
             class="min-h-9 border-0 border-b bg-transparent px-3"
             placeholder="Buscar noticias..."
           />
+          <button
+            class="min-h-9 border px-3 text-xs font-bold"
+            :class="
+              onlyFavorites
+                ? 'border-red-400 bg-red-50 text-red-600'
+                : 'border-japs-line bg-white text-japs-navy'
+            "
+            @click="onlyFavorites = !onlyFavorites"
+          >
+            ♥ Favoritas ({{ favorites.length }})
+          </button>
         </div>
         <div class="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
           <NewsCard
-            v-for="noticia in noticias"
+            v-for="noticia in filteredNews"
             :key="noticia.titulo"
             :noticia="noticia"
           />
         </div>
+        <p v-if="!filteredNews.length" class="py-12 text-center">
+          No hay noticias que coincidan con tu búsqueda.
+        </p>
         <nav class="mt-7 flex justify-center gap-2">
           <a
             class="bg-white px-3 py-2 text-xs text-japs-navy no-underline"

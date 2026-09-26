@@ -1,5 +1,7 @@
 <script setup>
 import logoJaps from "../assets/logo-japs.png";
+import { useShop } from "../composables/useShop";
+const { cartCount, cartOpen } = useShop();
 </script>
 
 <template>
@@ -49,6 +51,17 @@ import logoJaps from "../assets/logo-japs.png";
           to="/contacto"
           >Contacto</RouterLink
         >
+        <button
+          class="relative grid size-9 place-items-center rounded-full bg-japs-navy text-sm text-white"
+          aria-label="Abrir carrito"
+          @click="cartOpen = true"
+        >
+          🛒<span
+            v-if="cartCount"
+            class="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-japs-yellow text-[9px] font-bold text-japs-navy"
+            >{{ cartCount }}</span
+          >
+        </button>
       </nav>
     </div>
   </header>

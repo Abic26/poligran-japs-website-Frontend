@@ -37,6 +37,7 @@ const productos = nombres.map((nombre, index) => ({
   referencia: `REF-${String(index + 1).padStart(3, "0")}`,
   estado: index % 4 === 2 ? "Consultar" : "Disponible",
   estadoClase: index % 4 === 2 ? "orange" : "",
+  precio: 85000 + index * 17500,
   imagen: fotos[index % fotos.length],
 }));
 </script>

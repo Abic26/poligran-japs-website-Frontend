@@ -1,10 +1,25 @@
 <script setup>
-defineProps({ noticia: Object });
+import { computed } from "vue";
+import { useShop } from "../composables/useShop";
+const props = defineProps({ noticia: Object });
+const { favorites, toggleFavorite } = useShop();
+const isFavorite = computed(() =>
+  favorites.value.includes(props.noticia.titulo),
+);
 </script>
 <template>
   <article
-    class="overflow-hidden border-b-4 border-transparent bg-white shadow-none transition duration-200 hover:-translate-y-1 hover:border-japs-yellow"
+    class="relative overflow-hidden border-b-4 border-transparent bg-white shadow-none transition duration-200 hover:-translate-y-1 hover:border-japs-yellow"
   >
+    <button
+      class="absolute right-3 top-3 z-1 grid size-9 place-items-center rounded-full bg-white text-xl shadow-md"
+      :class="isFavorite ? 'text-red-500' : 'text-japs-text'"
+      :aria-label="isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+      :title="isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+      @click="toggleFavorite(noticia.titulo)"
+    >
+      {{ isFavorite ? "♥" : "♡" }}
+    </button>
     <img
       class="block h-[185px] w-full object-cover"
       :src="noticia.imagen"
