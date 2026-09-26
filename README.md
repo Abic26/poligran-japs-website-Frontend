@@ -72,7 +72,7 @@ Para ejecutar el proyecto necesitas tener instalados:
 1. Clona el repositorio y entra en la carpeta del proyecto:
 
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
+   git clone [<URL_DEL_REPOSITORIO>](https://github.com/Abic26/poligran-japs-website-Frontend)
    cd japs-website
    ```
 
